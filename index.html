@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="assets/style.css">
+<script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-monaco-editor@1/index.js"></script>
+<html class="flex h-screen w-screen flex-col">
+  <nav class="flex w-screen place-items-center bg-gray-800 text-white">
+    <h1 class="ml-4 p-2 text-2xl font-bold">Pear Studio</h1>
+    <a class="p-4 text-2xl hover:bg-sky-400">File</a>
+    <a class="p-4 text-2xl hover:bg-sky-400">Edit</a>
+    <a class="p-4 text-2xl hover:bg-sky-400" onclick="document.getElementById('build-modal').showModal()">Build</a>
+  </nav>
+
+  <main class=" flex bg-blue-700 text-green-500 h-screen">wiejf</main>
+</html>
+
+<dialog id="build-modal" class="bg-gray-800 w-6/12 h-2/4">
+        <h1 class="text-center text-2xl text-white text-bold m-4">Build your Project</h1>
+        <div class="flex bottom-0 absolute w-full">
+            <button class="bg-gray-500 hover:bg-sky-400 p-4 w-1/2">Build</button>
+            <button class="bg-gray-500 hover:bg-sky-400 p-4 w-1/2" onclick="document.getElementById('build-modal').close()">Cancel</button>
+        </div>
+</dialog>
+
+
+
+    <!-- <main class="flex-grow">
+        <div class="bg-neutral-800 w-2/12">
+            <div class="h-1/2 bg-blue"></div>
+            <div class="h-1/2 bg-red-700"></div>
+        </div>
+        <div id="studio" class="w-10/12 h-full inline-block">
+            <div class="bg-neutral-800 text-center text-white p-2">Editing index.js</div>
+            <wc-monaco-editor language="javascript" class="w-full h-full" src="https://raw.githubusercontent.com/dhilt/hello-world-js/master/src/index.js"></wc-monaco-editor>
+        </div> -->
