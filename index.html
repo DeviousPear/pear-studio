@@ -1,32 +1,71 @@
+<title>Pear Studio</title>
 <link rel="stylesheet" href="assets/style.css">
 <script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-monaco-editor@1/index.js"></script>
-<html class="flex h-screen w-screen flex-col">
-  <nav class="flex w-screen place-items-center bg-gray-800 text-white">
-    <h1 class="ml-4 p-2 text-2xl font-bold">Pear Studio</h1>
-    <a class="p-4 text-2xl hover:bg-sky-400">File</a>
-    <a class="p-4 text-2xl hover:bg-sky-400">Edit</a>
-    <a class="p-4 text-2xl hover:bg-sky-400" onclick="document.getElementById('build-modal').showModal()">Build</a>
-  </nav>
+<script src="https://cheerpxdemos.leaningtech.com/publicdeploy/20240316_136/cx.js"></script>
+<!-- i need to make a better editor, look into other options. Probably sticking with Monaco, 
+but maybe there's a better fork than that, it's buggy and has no IntelliSense -->
+<script src="assets/editor.js" type="module"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<body class="grid grid-rows-10 overflow-hidden bg-darkgray">
+    <nav class="flex w-screen place-items-center bg-gray-800 text-white row-span-1">
+        <h1 class="ml-4 p-2 text-2xl font-bold">Pear Studio</h1>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Home"><span class="material-symbols-outlined">home</span></a>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Undo"><span class="material-symbols-outlined">undo</span></a>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Redo"><span class="material-symbols-outlined">redo</span></a>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Download"><span class="material-symbols-outlined">download</span></a>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Build" onclick="document.getElementById('build-modal').showModal()"><span class="material-symbols-outlined">construction</span></a>
+        <a class="px-4 text-2xl hover:text-sky-400 cursor-pointer" alt="Download"><span class="material-symbols-outlined">settings</span></a>
+    </nav>
 
-  <main class=" flex bg-blue-700 text-green-500 h-screen">wiejf</main>
-</html>
+    <main class="inline-flex row-span-9">
+        <div class="bg-darkgray w-2/12"> 
+            <!-- this design needs a lot of work lol-->
+            <div class="h-1/3 resize-y overflow-auto">
+                <span class="block text-center shadow-black bg-darkgray shadow-md text-white">Assets 
+                    <span class="underline text-sky-400 cursor-pointer" onclick="uploadFile()">(Upload)</span>
+                </span>
+            </div>
+            <div class="h-1/3 resize-y overflow-auto border-t-2">
+                <span class="block text-center shadow-black bg-darkgray shadow-md text-white" >Scenes 
+                    <span class="underline text-sky-400 cursor-pointer" onclick="createScene()">(Create)</span>
+                </span>
+            </div>
+            
+            <div class="h-1/3 resize-y overflow-auto border-t-2">
+                <span class="block text-center shadow-black bg-darkgray shadow-md text-white">Materials 
+                    <span class="underline text-sky-400 cursor-pointer" onclick="createMaterial()">(Create)</span>
+                </span>
+            </div>
+        </div>
+        <div id="studio" class="border-l-2 border-white w-10/12 inline-grid grid-rows-20 box-border">
+            <div class="bg-darkgray text-center text-white p-2 row-span-1">Editing index.js</div>
+            <div class="row-span-19 w-full" id="monaco">
+                <wc-monaco-editor language="javascript" src="https://raw.githubusercontent.com/dhilt/hello-world-js/master/src/index.js"></wc-monaco-editor>
+            </div>
+        </div>
+    </main>
+</body>
 
 <dialog id="build-modal" class="bg-gray-800 w-6/12 h-2/4">
         <h1 class="text-center text-2xl text-white text-bold m-4">Build your Project</h1>
+        <form class="p-4 text-white" method="dialog" id="buildform">
+            <label class="m-2">Build target:</label> <select class="text-black">
+                <option>Electron App</option>
+                <option>Zip file ready for deploy</option>
+            </select>
+            <br>
+            <label class="m-2">Bundle Javascript(recomended):</label> <input checked type="checkbox">
+            <br> 
+            <label class="m-2">Minify Javascript(recomended):</label> <input checked type="checkbox">
+            <br>
+            <label class="m-2">Include JS in html file (not recomended):</label> <input type="checkbox">
+            <br>
+            <label></label>
+            
+        </form>
         <div class="flex bottom-0 absolute w-full">
-            <button class="bg-gray-500 hover:bg-sky-400 p-4 w-1/2">Build</button>
+            <button class="bg-gray-500 hover:bg-sky-400 p-4 w-1/2" onclick="document.getElementById('buildform').submit()">Build</button>
             <button class="bg-gray-500 hover:bg-sky-400 p-4 w-1/2" onclick="document.getElementById('build-modal').close()">Cancel</button>
         </div>
 </dialog>
 
-
-
-    <!-- <main class="flex-grow">
-        <div class="bg-neutral-800 w-2/12">
-            <div class="h-1/2 bg-blue"></div>
-            <div class="h-1/2 bg-red-700"></div>
-        </div>
-        <div id="studio" class="w-10/12 h-full inline-block">
-            <div class="bg-neutral-800 text-center text-white p-2">Editing index.js</div>
-            <wc-monaco-editor language="javascript" class="w-full h-full" src="https://raw.githubusercontent.com/dhilt/hello-world-js/master/src/index.js"></wc-monaco-editor>
-        </div> -->
