@@ -1,17 +1,29 @@
-import { WebContainer } from 'https://esm.sh/@webcontainer/api';
-const webcontainerInstance = await WebContainer.boot();
+// import { WebContainer } from 'https://esm.sh/@webcontainer/api';
+// const webcontainerInstance = await WebContainer.boot();
+//Set up Monaco
+require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs' }});
+require(["vs/editor/editor.main"], () => {
+  let editor = monaco.editor.create(document.getElementById('monaco'), {
+    value: `console.log("Hello World!")`,
+    language: 'javascript',
+    theme: 'vs-dark',
+  })
+  window.onresize = editor.layout
+  setTimeout(() => {document.getElementById("splash").classList.add("hidden")}, 4500)
+});
+//When clicked on the create buttons
 function createMaterial() {
     let name = prompt("Name your material", "myMaterial")
     if (name) {
-            webcontainerInstance.fs.writeFile("/src/materials/" + name, `
-            import * as BABYLON from "https://esm.sh/babylonjs"
-            const material = 
+            // webcontainerInstance.fs.writeFile("/src/materials/" + name, `
+            // import * as BABYLON from "https://esm.sh/babylonjs"
+            // const material = 
             
-            new BABYLON.StandardMaterial()
-            export default material;
-            `)
+            // new BABYLON.StandardMaterial()
+            // export default material;
+            // `)
     }}
-
+//its esm, so i need to expose it as a global
 Object.defineProperty(window, "createMaterial", {
     value: createMaterial,
     writable: false
@@ -44,6 +56,17 @@ Object.defineProperty(window, "uploadFile", {
     value: uploadFile,
     writable: false
 })
+
+const resizeObserver = new ResizeObserver(() => {
+    console.log("resized")
+    let assetsRect = document.getElementById("assets").getBoundingClientRect()
+    let scenesRect = document.getElementById("scenes").getBoundingClientRect()
+    document.getElementById("materials").style.height = `calc(100% - ${scenesRect.height + assetsRect.height}px)`
+  });
+  
+  resizeObserver.observe(document.getElementById("scenes"));
+  resizeObserver.observe(document.getElementById("assets"));
+  
 
 
 
@@ -99,4 +122,3 @@ Object.defineProperty(window, "uploadFile", {
         
 //     })
 // })
-
