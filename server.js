@@ -5,7 +5,7 @@
 require("http").createServer((req, res) => {
     res.setHeader("Cross-Origin-Embedder-Policy", "require-corp")
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin")
-    if (req.url == "/") {
+    if (req.url.match(/^(\/|\/*\?.*)$/)) {
         console.log("/")
         res.setHeader("Content-Type", "text/html")
         require("fs").createReadStream(__dirname + "/index.html").pipe(res)
