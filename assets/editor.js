@@ -79,7 +79,7 @@ window.createMaterial = () => {
     let name = prompt("Name your material", "myMaterial")
     if (name) {
         webcontainerInstance.fs.writeFile("src/materials/" + name,
-            `import * as BABYLON from "https://esm.sh/babylonjs"
+            `import * as BABYLON from "@babylonjs/core"
 const material = new BABYLON.StandardMaterial()
 export default material;`)
         updateExplorer()
@@ -89,7 +89,7 @@ window.createScene = () => {
     let name = prompt("Name your scene", "myScene")
     if (name) {
         webcontainerInstance.fs.writeFile("src/scenes/" + name,
-`import * as BABYLON from "https://esm.sh/babylonjs"
+            `import * as BABYLON from "@babylonjs/core"
 export default function createScene(engine, canvas) {
     var scene = new BABYLON.Scene(engine);
     var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
@@ -124,7 +124,8 @@ const resizeObserver = new ResizeObserver(() => {
     console.log("resized")
     let assetsRect = document.getElementById("assets").getBoundingClientRect()
     let scenesRect = document.getElementById("scenes").getBoundingClientRect()
-    document.getElementById("materials").style.height = `calc(100% - ${scenesRect.height + assetsRect.height}px)`
+    let matsRect = document.getElementById("materials").getBoundingClientRect()
+    document.getElementById("scripts").style.height = `calc(100% - ${scenesRect.height + assetsRect.height}px)`
 })
 
 resizeObserver.observe(document.getElementById("scenes"))

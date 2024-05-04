@@ -24,21 +24,27 @@
     <main class="inline-flex row-span-9">
         <div class="bg-darkgray w-2/12"> 
             <!-- this design needs a lot of work lol-->
-            <div class="h-1/3 resize-y overflow-auto min-h-20" id="assets">
+            <div class="h-1/4 resize-y overflow-auto min-h-20" id="assets">
                 <span class="block text-center shadow-black bg-darkgray shadow-md text-white">Assets 
                     <span class="underline text-sky-400 cursor-pointer" onclick="uploadFile()">(Upload)</span>
                     <div id="assets-list"></div>
                 </span>
             </div>
-            <div class="h-1/3 resize-y overflow-auto min-h-20 border-t-2" id="scenes">
+            <div class="h-1/4 resize-y overflow-auto min-h-20 border-t-2" id="scenes">
                 <span class="block text-center shadow-black bg-darkgray shadow-md text-white" >Scenes 
                     <span class="underline text-sky-400 cursor-pointer" onclick="createScene()">(Create)</span>
                 </span>
                 <div id="scenes-list"></div>
             </div>
             
-            <div class="h-1/3 overflow-auto min-h-20 border-t-2" id="materials">
+            <div class="h-1/4 overflow-auto min-h-20 border-t-2" id="materials">
                 <span class="block text-center shadow-black bg-darkgray shadow-md text-white">Materials 
+                    <span class="underline text-sky-400 cursor-pointer" onclick="createMaterial()">(Create)</span>
+                </span>
+                <div id="materials-list"></div>
+            </div>
+            <div class="h-1/4 overflow-auto min-h-20 border-t-2" id="scripts">
+                <span class="block text-center shadow-black bg-darkgray shadow-md text-white">Scripts 
                     <span class="underline text-sky-400 cursor-pointer" onclick="createMaterial()">(Create)</span>
                 </span>
                 <div id="materials-list"></div>
